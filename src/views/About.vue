@@ -1,5 +1,15 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <ListVIPTicket />
   </div>
 </template>
+
+<script>
+import ListVIPTicket from '../components/ListVIPTicket.vue'
+
+export default {
+  components: {
+    ListVIPTicket,
+  },
+}
+</script>
