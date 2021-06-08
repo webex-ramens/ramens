@@ -2,10 +2,8 @@
   <div class="VIPticket-list">
     <div class="VIPticket-item" v-for="ticket in tickets" :key="ticket.id">
       <h2 class="VIPticket-title">{{ ticket.title }}</h2>
-      <span class="VIPticket__createdBy">{{ ticket.createdBy }}</span>
-      <div class="VIPticket__image">
-        <img v-vind:src="ticket.imageUrl" />
-      </div>
+      <div class="VIPticket__createdBy">{{ ticket.createdBy }}</div>
+      <img class="VIPticket__image" v-bind:src="ticket.imageUrl" />
       <div class="VIPticket__description">{{ ticket.description }}</div>
       <div class="VIPticket__createdAt">{{ ticket.createdAt }}</div>
     </div>
@@ -49,5 +47,9 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
+}
+.VIPticket__image {
+  width: 100%;
+  object-fit: contain;
 }
 </style>
