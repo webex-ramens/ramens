@@ -1,11 +1,13 @@
 <template>
   <div class="VIPticket-list">
     <div class="VIPticket-item" v-for="ticket in tickets" :key="ticket.id">
-      <h2 class="VIPticket-title">{{ ticket.title }}</h2>
-      <div class="VIPticket__createdBy">{{ ticket.createdBy }}</div>
-      <img class="VIPticket__image" v-bind:src="ticket.imageUrl" />
-      <div class="VIPticket__description">{{ ticket.description }}</div>
-      <div class="VIPticket__createdAt">{{ ticket.createdAt }}</div>
+      <router-link :to="{ name: 'ShowVIPTicket', params: { id: ticket.id } }">
+        <h2 class="VIPticket-title">{{ ticket.title }}</h2>
+        <div class="VIPticket__createdBy">{{ ticket.createdBy }}</div>
+        <img class="VIPticket__image" v-bind:src="ticket.imageUrl" />
+        <div class="VIPticket__description">{{ ticket.description }}</div>
+        <div class="VIPticket__createdAt">{{ ticket.createdAt }}</div>
+      </router-link>
     </div>
   </div>
 </template>
