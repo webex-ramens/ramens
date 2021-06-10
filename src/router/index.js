@@ -12,7 +12,7 @@ const routes = [
     component: ListVIPTicket,
   },
   {
-    path: '/show--vip-ticket/:id',
+    path: '/show/ticket/:id',
     name: 'ShowVIPTicket',
     component: ShowVIPTicket,
   },

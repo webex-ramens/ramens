@@ -1,6 +1,6 @@
 <template>
   <div class="VIPticket-item">
-    <h2 class="VIPticket-title">{{ ticket.title }}</h2>
+    <h2 class="VIPticket__title">{{ ticket.title }}</h2>
     <div class="VIPticket__createdBy">{{ ticket.createdBy }}</div>
     <img class="VIPticket__image" v-bind:src="ticket.imageUrl" />
     <div class="VIPticket__description">{{ ticket.description }}</div>
@@ -24,12 +24,6 @@ export default {
       .doc(this.$route.params.id)
       .get()
       .then((snapshot) => {
-        if (snapshot.exists) {
-          console.log('Document data:', snapshot.data())
-        } else {
-          // doc.data() will be undefined in this case
-          console.log('No such document!')
-        }
         this.ticket = {
           id: snapshot.id,
           ...snapshot.data(),
