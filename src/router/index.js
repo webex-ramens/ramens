@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import BeforeSignIn from '@/views/BeforeSignIn.vue'
 import AfterSignIn from '@/views/AfterSignIn.vue'
 import firebase from 'firebase'
+// import ListVIPTicket from '../views/ListVIPTicket.vue'
+import ShowVIPTicket from '../views/ShowVIPTicket.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +22,11 @@ const routes = [
     path: '/AfterSignIn',
     name: 'AfterSignIn',
     component: AfterSignIn,
+  },
+  {
+    path: '/show/ticket/:id',
+    name: 'ShowVIPTicket',
+    component: ShowVIPTicket,
   },
 ]
 
