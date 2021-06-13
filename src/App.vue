@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/BeforeSignIn">Before Sign In Page</router-link>
-      <router-link to="/AfterSignIn">After Sign In Page</router-link>
+      <router-link to="/BeforeSignIn"></router-link>
+      <router-link to="/AfterSignIn"></router-link>
     </div>
-    <div class="sign-in">
-      <span @click="signIn">Sign In</span>
-      <span @click="signOut">Sign Out</span>
-    </div>
+    <v-app-bar>
+      <div class="sign-in">
+        <span @click="signIn">サインイン</span>
+        <span @click="signOut">サインアウト</span>
+      </div>
+    </v-app-bar>
     <router-view />
   </div>
 </template>
@@ -49,13 +51,19 @@ export default {
 }
 .sign-in span {
   font-weight: bold;
-  color: #2c3e50;
+  color: #0a4091;
   padding: 0 1rem;
 }
 .sign-in span:hover {
-  color: #2c3e502b;
+  color: #a332ad2b;
 }
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.sign-in {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 </style>
