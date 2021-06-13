@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ListVIPTicket from '../views/ListVIPTicket.vue'
 import ShowVIPTicket from '../views/ShowVIPTicket.vue'
-import PostVIPTicket from '../views/PostVIPTicket.vue'
+import PostVIPTicket2 from '../views/PostVIPTicket2.vue'
 
 Vue.use(VueRouter)
 
@@ -19,8 +19,8 @@ const routes = [
   },
   {
     path: '/post',
-    name: 'PostVIPTicket',
-    component: PostVIPTicket,
+    name: 'PostVIPTicket2',
+    component: PostVIPTicket2,
   },
 ]
 
