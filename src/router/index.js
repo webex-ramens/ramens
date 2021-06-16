@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ListVIPTicket from '../views/ListVIPTicket.vue'
 import ShowVIPTicket from '../views/ShowVIPTicket.vue'
+import PostVIPTicket from '../views/PostVIPTicket.vue'
 // import firebase from 'firebase'
 
 Vue.use(VueRouter)
@@ -16,6 +17,11 @@ const routes = [
     path: '/show/ticket/:id',
     name: 'ShowVIPTicket',
     component: ShowVIPTicket,
+  },
+  {
+    path: '/post',
+    name: 'PostVIPTicket',
+    component: PostVIPTicket,
   },
 ]
 
