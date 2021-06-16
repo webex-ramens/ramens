@@ -1,27 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import BeforeSignIn from '@/views/BeforeSignIn.vue'
-import AfterSignIn from '@/views/AfterSignIn.vue'
-import firebase from 'firebase'
-// import ListVIPTicket from '../views/ListVIPTicket.vue'
+import ListVIPTicket from '../views/ListVIPTicket.vue'
 import ShowVIPTicket from '../views/ShowVIPTicket.vue'
+// import firebase from 'firebase'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    redirect: '/BeforeSignIn',
-  },
-  {
-    path: '/BeforeSignIn',
-    name: 'BeforeSignIn',
-    component: BeforeSignIn,
-  },
-  {
-    path: '/AfterSignIn',
-    name: 'AfterSignIn',
-    component: AfterSignIn,
+    name: 'ListVIPTicket',
+    component: ListVIPTicket,
   },
   {
     path: '/show/ticket/:id',
@@ -36,16 +25,16 @@ const router = new VueRouter({
   routes,
 })
 
-let isSignedIn = () => {
-  return firebase.auth().currentUser
-}
+// let isSignedIn = () => {
+//   return firebase.auth().currentUser
+// }
 
-router.beforeEach((to, from, next) => {
-  if (to.name !== 'BeforeSignIn' && !isSignedIn()) {
-    next('/BeforeSignIn')
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.name !== 'BeforeSignIn' && !isSignedIn()) {
+//     next('/BeforeSignIn')
+//   } else {
+//     next()
+//   }
+// })
 
 export default router
