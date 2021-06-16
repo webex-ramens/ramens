@@ -5,8 +5,10 @@
         <h2 class="VIPticket__title">{{ ticket.title }}</h2>
         <div class="VIPticket__createdBy">{{ ticket.createdBy }}</div>
         <img class="VIPticket__image" v-bind:src="ticket.imageUrl" />
-        <div class="VIPticket__description">{{ ticket.description }}</div>
-        <div class="VIPticket__createdAt">{{ ticket.createdAt }}</div>
+        <div class="VIPticket__description">詳細:{{ ticket.description }}</div>
+        <div class="VIPticket__createdAt">投稿日:{{ ticket.createdAt }}</div>
+        <div class="VIPticket__deadLine">締切:{{ ticket.deadLine }}</div>
+        <div class="VIPticket__price">現在価格:{{ ticket.price }}</div>
       </router-link>
     </div>
   </div>

@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import firebase from 'firebase'
 import 'firebase/firestore'
 import 'firebase/auth'
@@ -14,3 +15,28 @@ const firebaseConfig = {
 }
 
 firebase.initializeApp(firebaseConfig)
+
+const initialUserState = {
+  uid: '',
+  displayName: '',
+  photoURL: '',
+}
+
+const $auth = Vue.observable({
+  currentUser: { ...initialUserState },
+})
+firebase.auth().onAuthStateChanged((user) => {
+  let state
+  if (user) {
+    const { uid, displayName, photoURL } = user
+    state = {
+      uid,
+      displayName,
+      photoURL,
+    }
+  } else {
+    state = initialUserState
+  }
+  Object.assign($auth.currentUser, state)
+})
+Vue.prototype.$auth = $auth
