@@ -1,17 +1,22 @@
 <template>
   <div class="VIPticket-item">
+    <h1 class="VIPticket__successfulBid" v-if="ticket.successfulBid">
+      落札済みです
+    </h1>
     <h2 class="VIPticket__title">{{ ticket.title }}</h2>
     <div class="VIPticket__createdBy">{{ ticket.createdBy }}</div>
     <img class="VIPticket__image" v-bind:src="ticket.imageUrl" />
     <div class="VIPticket__description">詳細:{{ ticket.description }}</div>
     <div class="VIPticket__createdAt">投稿日:{{ ticket.createdAt }}</div>
-    <div class="VIPticket__deadLine">締切:{{ ticket.deadLine }}</div>
+    <div class="VIPticket__deadLine">
+      締切:{{ ticket.deadLine }} 23:59:59まで
+    </div>
     <div class="VIPticket__price">現在価格:{{ ticket.price }}</div>
     <BuyVIPTicket />
     <router-link
       to="/after-successful-bid"
-      v-if="seen"
-      class="VIPticket__successfulBid"
+      v-if="ticket.successfulBid && seen"
+      class="VIPticket__afterSuccessfulBid"
     >
       落札後の画面へ
     </router-link>
@@ -43,12 +48,9 @@ export default {
           id: snapshot.id,
           ...snapshot.data(),
         }
-        // 落札しているかどうか && 落札者==ログインユーザーかどうか
-        if (
-          snapshot.data().successfulBid &&
-          snapshot.data().bidderUID == firebase.auth().currentUser.uid
-        ) {
-          // 落札後ボタンを見えるようにする
+        // 落札者==ログインユーザーかどうか
+        if (snapshot.data().bidderUID == firebase.auth().currentUser.uid) {
+          // 落札後ボタンを見えるようにするためにseenをtrueに変更
           this.seen = true
         }
       })
@@ -57,6 +59,9 @@ export default {
 </script>
 
 <style scoped>
+.VIPticket__successfulBid {
+  color: red;
+}
 .VIPticket-item {
   border: solid;
   text-align: center;

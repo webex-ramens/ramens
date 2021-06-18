@@ -7,9 +7,13 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue'
+import ChangeSuccessfulBid from '@/ChangeSuccessfulBid'
 export default {
   components: {
     Navbar,
+  },
+  created() {
+    ChangeSuccessfulBid.func()
   },
 }
 </script>
