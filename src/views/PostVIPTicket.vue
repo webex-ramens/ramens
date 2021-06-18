@@ -41,7 +41,7 @@ export default {
       description: '', //(詳しい説明)
       createdAt: '', //(投稿日時)
       createdBy: '', //投稿者名
-      imageUrl: '',
+      imageUrl: 'https://via.placeholder.com/800x600',
       price: '',
       deadLine: null, //締め切り日
     }
@@ -49,25 +49,25 @@ export default {
 
   methods: {
     post() {
-      /* 変更点 */
-      const tweet = {
-        tilte: this.title,
-        description: this.description,
-        createdAt: new Date(),
-        createdBy: this.createdBy,
-        price: this.price,
-        deadLine: this.deadLine,
-      }
-      firebase
-        .firestore()
-        .collection('tweets')
-        .add(tweet)
-        .then((ref) => {
-          this.tweets.push({
-            id: ref.id,
-            ...tweet,
-          })
-        })
+      firebase.auth().onAuthStateChanged(async (user) => {
+        if (user) {
+          const ticket = {
+            title: this.title,
+            description: this.description,
+            createdAt: new Date(),
+            createdBy: this.createdBy,
+            price: this.price,
+            deadLine: this.deadLine,
+            vipUID: firebase.auth().currentUser.uid,
+            bidderUID: '',
+            imageUrl: this.imageUrl,
+          }
+          await firebase.firestore().collection('tickets').add(ticket)
+          alert('投稿が完了しました')
+        } else {
+          alert('ログインしてください')
+        }
+      })
     },
   },
 }
