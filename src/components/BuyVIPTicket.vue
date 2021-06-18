@@ -28,17 +28,26 @@ export default {
 
   methods: {
     bidTicket() {
-      const ticketRef = firebase
-        .firestore()
-        .collection('tickets')
-        .doc(this.$route.params.id)
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          const ticketRef = firebase
+            .firestore()
+            .collection('tickets')
+            .doc(this.$route.params.id)
 
-      ticketRef.get().then(async (snapshot) => {
-        if (this.inputPrice > snapshot.data().price) {
-          await ticketRef.update({ price: this.inputPrice })
-          alert('入札が完了しました'), location.reload()
+          ticketRef.get().then(async (snapshot) => {
+            if (this.inputPrice > snapshot.data().price) {
+              await ticketRef.update({
+                price: this.inputPrice,
+                bidderUID: firebase.auth().currentUser.uid,
+              })
+              alert('入札が完了しました'), location.reload()
+            } else {
+              alert('入力内容に誤りがあります')
+            }
+          })
         } else {
-          alert('入力内容に誤りがあります')
+          alert('ログインしてください')
         }
       })
     },
