@@ -8,6 +8,13 @@
     <div class="VIPticket__deadLine">締切:{{ ticket.deadLine }}</div>
     <div class="VIPticket__price">現在価格:{{ ticket.price }}</div>
     <BuyVIPTicket />
+    <router-link
+      to="/after-successful-bid"
+      v-if="seen"
+      class="VIPticket__successfulBid"
+    >
+      落札後の画面へ
+    </router-link>
   </div>
 </template>
 
@@ -22,6 +29,7 @@ export default {
   data() {
     return {
       ticket: {},
+      seen: false,
     }
   },
   created() {
@@ -34,6 +42,14 @@ export default {
         this.ticket = {
           id: snapshot.id,
           ...snapshot.data(),
+        }
+        // 落札しているかどうか && 落札者==ログインユーザーかどうか
+        if (
+          snapshot.data().successfulBid &&
+          snapshot.data().bidderUID == firebase.auth().currentUser.uid
+        ) {
+          // 落札後ボタンを見えるようにする
+          this.seen = true
         }
       })
   },
