@@ -11,6 +11,7 @@
 import firebase from 'firebase'
 
 export default {
+  name: 'Influencer_profile',
   data() {
     return {
       user: {},

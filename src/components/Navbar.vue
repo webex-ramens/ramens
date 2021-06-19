@@ -1,10 +1,25 @@
 <template>
   <v-app-bar>
     <div class="sign-in">
-      <span @click="signIn">サインイン</span>
+      <span>
+        <router-link to="/">オークション</router-link>
+      </span>
+      <span>
+        <router-link to="/listVIPProfile">インフルエンサー</router-link>
+      </span>
+
+      <span
+        @click="
+          signIn()
+          profile()
+        "
+        >サインイン</span
+      >
       <span @click="signOut">サインアウト</span>
-      <span v-if="(seen = true)">
-        <router-link to="/editProfile">プロフィール編集</router-link>
+
+      <span v-if="seen == true">
+        <router-link to="/editProfile">投稿</router-link>
+        <router-link to="/post">プロフィール編集</router-link>
       </span>
       <span v-else>
         <router-link to="/myProfile">プロフィール</router-link>
@@ -38,12 +53,10 @@ export default {
     },
 
     profile() {
-      // ログインしているか判定
-      firebase.auth().onAuthStateChanged(async (user) => {
-        if (user) {
-          this.seen = 'ture'
-        }
-      })
+      this.seen = 'ture'
+    },
+    out() {
+      this.seen = 'false'
     },
   },
 }

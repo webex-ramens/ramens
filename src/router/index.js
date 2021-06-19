@@ -5,9 +5,8 @@ import ShowVIPTicket from '../views/ShowVIPTicket.vue'
 import PostVIPTicket from '../views/PostVIPTicket.vue'
 import AfterSuccessfulBid from '../views/AfterSuccessfulBid.vue'
 import ListVIPProfile from '../views/ListVIPProfile.vue'
-import Influencer_profile from '../views/Influencer_profile.vue'
 import EditProfile from '../components/EditProfile.vue'
-// import { component } from 'vue/types/umd'
+import Influencer_profile from '../views/Influencer_profile.vue'
 // import firebase from 'firebase'
 
 Vue.use(VueRouter)

@@ -31,7 +31,7 @@ firebase.auth().onAuthStateChanged((user) => {
     const { uid, displayName, photoURL } = user
     firebase
       .firestore()
-      .collection('user')
+      .collection('users')
       .doc(user.uid)
       .get()
       .then((doc) => {
@@ -48,7 +48,7 @@ firebase.auth().onAuthStateChanged((user) => {
             displayName,
             photoURL,
           }
-          firebase.firestore().collection('user').doc(user.uid).add({
+          firebase.firestore().collection('users').doc(user.uid).set({
             uid,
             name: displayName,
             photoURL: photoURL,

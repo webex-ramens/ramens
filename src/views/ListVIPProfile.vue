@@ -27,6 +27,7 @@ export default {
     firebase
       .firestore()
       .collection('users')
+      .where('isVIP', '==', true)
       .get()
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
