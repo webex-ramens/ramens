@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="logs">
-      <div v-for="log in logs" :key="log.timestamp.seconds">
+      <div v-for="log in logs" :key="log.timestamp">
         <div>名前:{{ log.name }}</div>
         <div>発言:{{ log.content }}</div>
       </div>
@@ -35,18 +35,27 @@ export default {
   methods: {
     post() {
       if (this.content && this.$auth.currentUser.uid) {
-        firebase.firestore().collection('chat').add({
-          content: this.content,
-          name: this.$auth.currentUser.displayName,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-          uid: this.$auth.currentUser.uid,
-          photoURL: this.$auth.currentUser.photoURL,
-        })
+        firebase
+          .firestore()
+          .collection('tickets')
+          .doc(this.$route.params.id)
+          .collection('chat')
+          .add({
+            content: this.content,
+            name: this.$auth.currentUser.displayName,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            uid: this.$auth.currentUser.uid,
+            photoURL: this.$auth.currentUser.photoURL,
+          })
       }
     },
   },
   created() {
-    const ref = firebase.firestore().collection('chat')
+    const ref = firebase
+      .firestore()
+      .collection('tickets')
+      .doc(this.$route.params.id)
+      .collection('chat')
     this.unsubscribe = ref.onSnapshot((snapshot) => {
       let logs = []
       snapshot.forEach((doc) => {

@@ -34,7 +34,6 @@
 import firebase from 'firebase'
 
 export default {
-  name: 'PostVIPTicket2',
   data() {
     return {
       title: '', //(VIPチケットの題名)
@@ -49,6 +48,7 @@ export default {
 
   methods: {
     post() {
+      // ログインしているか判定
       firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
           const ticket = {
@@ -61,6 +61,7 @@ export default {
             vipUID: firebase.auth().currentUser.uid,
             bidderUID: '',
             imageUrl: this.imageUrl,
+            successfulBid: false,
           }
           await firebase.firestore().collection('tickets').add(ticket)
           alert('投稿が完了しました')
