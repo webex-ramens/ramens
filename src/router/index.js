@@ -26,7 +26,7 @@ const routes = [
     component: PostVIPTicket,
   },
   {
-    path: '/after-successful-bid',
+    path: '/after-successful-bid/:id',
     name: 'AfterSuccessfulBid',
     component: AfterSuccessfulBid,
   },

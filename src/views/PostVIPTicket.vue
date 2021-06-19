@@ -34,7 +34,6 @@
 import firebase from 'firebase'
 
 export default {
-  name: 'PostVIPTicket2',
   data() {
     return {
       title: '', //(VIPチケットの題名)

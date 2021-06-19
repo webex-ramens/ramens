@@ -14,7 +14,7 @@
     <div class="VIPticket__price">現在価格:{{ ticket.price }}</div>
     <BuyVIPTicket />
     <router-link
-      to="/after-successful-bid"
+      :to="{ name: 'AfterSuccessfulBid', params: { id: ticket.id } }"
       v-if="ticket.successfulBid && seen"
       class="VIPticket__afterSuccessfulBid"
     >
@@ -48,8 +48,11 @@ export default {
           id: snapshot.id,
           ...snapshot.data(),
         }
-        // 落札者==ログインユーザーかどうか
-        if (snapshot.data().bidderUID == firebase.auth().currentUser.uid) {
+        // ”ログインユーザー==落札者”または”ログインユーザー==出品者かどうか”
+        if (
+          firebase.auth().currentUser.uid == snapshot.data().bidderUID ||
+          firebase.auth().currentUser.uid == snapshot.data().vipUID
+        ) {
           // 落札後ボタンを見えるようにするためにseenをtrueに変更
           this.seen = true
         }
