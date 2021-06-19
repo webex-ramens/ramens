@@ -22,7 +22,7 @@
         <router-link to="/post">プロフィール編集</router-link>
       </span>
       <span v-else>
-        <router-link to="/myProfile">プロフィール</router-link>
+        <router-link to="/post">プロフィール</router-link>
       </span>
     </div>
   </v-app-bar>

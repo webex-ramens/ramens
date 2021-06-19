@@ -58,5 +58,18 @@ export default {
       })
     },
   },
+  created() {
+    firebase
+      .firestore()
+      .collection('users')
+      .doc(this.$route.params.id)
+      .get()
+      .then((snapshot) => {
+        this.user = {
+          id: snapshot.id,
+          ...snapshot.data(),
+        }
+      })
+  },
 }
 </script>
