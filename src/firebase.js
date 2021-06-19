@@ -29,14 +29,38 @@ firebase.auth().onAuthStateChanged((user) => {
   let state
   if (user) {
     const { uid, displayName, photoURL } = user
-    state = {
-      uid,
-      displayName,
-      photoURL,
-    }
+    firebase
+      .firestore()
+      .collection('user')
+      .doc(user.uid)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          state = {
+            uid,
+            displayName,
+            photoURL,
+            ...doc.data(),
+          }
+        } else {
+          state = {
+            uid,
+            displayName,
+            photoURL,
+          }
+          firebase.firestore().collection('user').doc(user.uid).add({
+            uid,
+            name: displayName,
+            photoURL: photoURL,
+            isVIP: false,
+            profile: '',
+          })
+        }
+        Object.assign($auth.currentUser, state)
+      })
   } else {
     state = initialUserState
+    Object.assign($auth.currentUser, state)
   }
-  Object.assign($auth.currentUser, state)
 })
 Vue.prototype.$auth = $auth

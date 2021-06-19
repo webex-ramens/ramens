@@ -4,6 +4,9 @@ import ListVIPTicket from '../views/ListVIPTicket.vue'
 import ShowVIPTicket from '../views/ShowVIPTicket.vue'
 import PostVIPTicket from '../views/PostVIPTicket.vue'
 import AfterSuccessfulBid from '../views/AfterSuccessfulBid.vue'
+import ListVIPProfile from '../views/ListVIPProfile.vue'
+import Influencer_profile from '../views/Influencer_profile.vue'
+import EditProfile from '../components/EditProfile.vue'
 // import { component } from 'vue/types/umd'
 // import firebase from 'firebase'
 
@@ -29,6 +32,21 @@ const routes = [
     path: '/after-successful-bid',
     name: 'AfterSuccessfulBid',
     component: AfterSuccessfulBid,
+  },
+  {
+    path: '/listVIPProfile',
+    name: 'ListVIPProfile',
+    component: ListVIPProfile,
+  },
+  {
+    path: '/show/user/:id',
+    name: 'Influencer_profile',
+    component: Influencer_profile,
+  },
+  {
+    path: '/editProfile',
+    name: 'EditProfile',
+    component: EditProfile,
   },
 ]
 
