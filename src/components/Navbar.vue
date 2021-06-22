@@ -1,8 +1,23 @@
 <template>
   <v-app-bar>
     <div class="sign-in">
-      <span @click="signIn">サインイン</span>
-      <span @click="signOut">サインアウト</span>
+      <span>
+        <router-link to="/">オークション</router-link>
+      </span>
+      <span>
+        <router-link to="/listVIPProfile">インフルエンサー</router-link>
+      </span>
+
+      <span v-if="!isSignedIn" @click="signIn()">サインイン</span>
+      <span v-else @click="signOut">サインアウト</span>
+
+      <span v-if="isSignedIn">
+        <router-link to="/post">投稿</router-link>
+        <router-link to="/editProfile">プロフィール編集</router-link>
+      </span>
+      <span v-else>
+        <router-link to="//Profile">プロフィール</router-link>
+      </span>
     </div>
   </v-app-bar>
 </template>
@@ -11,6 +26,10 @@
 import firebase from 'firebase'
 
 export default {
+  data() {
+    return {}
+  },
+
   methods: {
     signIn() {
       const provider = new firebase.auth.GoogleAuthProvider()
@@ -18,7 +37,11 @@ export default {
     },
     signOut() {
       firebase.auth().signOut()
-      this.$router.push('/BeforeSignIn')
+    },
+  },
+  computed: {
+    isSignedIn() {
+      return this.$auth.currentUser.uid
     },
   },
 }
