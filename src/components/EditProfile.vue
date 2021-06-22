@@ -8,7 +8,11 @@
         <!--タイトル-->
         <v-text-field label="名前" v-model="name" />
         <!--画像-->
-        <v-file-input label="プロフィール画像" v-model="photoURL" />
+        <input
+          type="file"
+          label="プロフィール画像"
+          v-on:change="onFileChanged"
+        />
         <!--詳細内容-->
         <v-textarea label="内容" solo v-model="profile" />
         <v-switch
@@ -40,36 +44,69 @@ export default {
   },
 
   methods: {
+    onFileChanged(e) {
+      console.log(e)
+      const imageFile = e.target.files[0]
+      if (imageFile) {
+        const fileRef = firebase.storage().ref().child(this.user.uid)
+        fileRef
+          .put(imageFile)
+          .then(() => {
+            return fileRef.getDownloadURL()
+          })
+          .then((url) => {
+            this.photoURL = url
+          })
+      }
+    },
     post() {
-      // ログインしているか判定
-      firebase.auth().onAuthStateChanged(async (user) => {
-        if (user) {
-          const user = {
-            name: this.name, //(VIPチケットの題名)
-            photoURL: '',
-            profile: this.profile,
-            isVIP: this.isVIP, //締め切り日
-          }
-          await firebase.firestore().collection('users').add(user)
-          alert('プロフィールが完了しました')
-        } else {
-          alert('ログインしてください')
+      if (this.user.uid) {
+        const user = {
+          name: this.name, //(VIPチケットの題名)
+          photoURL: this.photoURL,
+          profile: this.profile,
+          isVIP: this.isVIP, //締め切り日
         }
-      })
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(this.user.uid)
+          .set(user)
+          .then(() => {
+            this.$router.push('/')
+          })
+      }
     },
   },
   created() {
-    firebase
-      .firestore()
-      .collection('users')
-      .doc(this.$route.params.id)
-      .get()
-      .then((snapshot) => {
-        this.user = {
-          id: snapshot.id,
-          ...snapshot.data(),
-        }
-      })
+    const subscription = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(user.uid)
+          .get()
+          .then((snapshot) => {
+            console.log(snapshot)
+            return snapshot.data()
+          })
+          .then((data) => {
+            this.name = data.name
+            this.photoURL = data.photoURL
+            this.profile = data.profile
+            this.isVIP = data.isVIP
+          })
+      }
+    })
+    subscription()
+  },
+  computed: {
+    user() {
+      return this.$auth.currentUser
+    },
+    uid() {
+      return this.$auth.currentUser.uid
+    },
   },
 }
 </script>

@@ -6,7 +6,8 @@ import PostVIPTicket from '../views/PostVIPTicket.vue'
 import AfterSuccessfulBid from '../views/AfterSuccessfulBid.vue'
 import ListVIPProfile from '../views/ListVIPProfile.vue'
 import EditProfile from '../components/EditProfile.vue'
-import Influencer_profile from '../views/Influencer_profile.vue'
+import InfluencerProfile from '../views/InfluencerProfile.vue'
+
 // import firebase from 'firebase'
 
 Vue.use(VueRouter)
@@ -39,8 +40,8 @@ const routes = [
   },
   {
     path: '/show/user/:id',
-    name: 'Influencer_profile',
-    component: Influencer_profile,
+    name: 'InfluencerProfile',
+    component: InfluencerProfile,
   },
   {
     path: '/editProfile',

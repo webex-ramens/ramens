@@ -8,21 +8,15 @@
         <router-link to="/listVIPProfile">インフルエンサー</router-link>
       </span>
 
-      <span
-        @click="
-          signIn()
-          profile()
-        "
-        >サインイン</span
-      >
-      <span @click="signOut">サインアウト</span>
+      <span v-if="!isSignedIn" @click="signIn()">サインイン</span>
+      <span v-else @click="signOut">サインアウト</span>
 
-      <span v-if="seen == true">
-        <router-link to="/editProfile">投稿</router-link>
-        <router-link to="/post">プロフィール編集</router-link>
+      <span v-if="isSignedIn">
+        <router-link to="/post">投稿</router-link>
+        <router-link to="/editProfile">プロフィール編集</router-link>
       </span>
       <span v-else>
-        <router-link to="/post">プロフィール</router-link>
+        <router-link to="//Profile">プロフィール</router-link>
       </span>
     </div>
   </v-app-bar>
@@ -33,9 +27,7 @@ import firebase from 'firebase'
 
 export default {
   data() {
-    return {
-      seen: 'false',
-    }
+    return {}
   },
 
   methods: {
@@ -44,19 +36,12 @@ export default {
       firebase.auth().signInWithRedirect(provider)
     },
     signOut() {
-      firebase.auth().signOut()(async (user) => {
-        this.$router.push('/BeforeSignIn')
-        if (user) {
-          this.seen = 'false'
-        }
-      })
+      firebase.auth().signOut()
     },
-
-    profile() {
-      this.seen = 'ture'
-    },
-    out() {
-      this.seen = 'false'
+  },
+  computed: {
+    isSignedIn() {
+      return this.$auth.currentUser.uid
     },
   },
 }
