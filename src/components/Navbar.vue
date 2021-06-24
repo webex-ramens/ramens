@@ -12,12 +12,14 @@
       <span v-else @click="signOut">サインアウト</span>
 
       <span v-if="isSignedIn">
-        <router-link to="/post">投稿</router-link>
+        <router-link v-if="isVIP && isSignedIn" to="/post">投稿</router-link>
         <router-link to="/editProfile">プロフィール編集</router-link>
       </span>
-      <span v-else>
-        <router-link to="//Profile">プロフィール</router-link>
-      </span>
+
+      <!-- ↓いらないと判断しました -->
+      <!-- <span v-else>
+        <router-link to="/Profile">プロフィール</router-link>
+      </span> -->
     </div>
   </v-app-bar>
 </template>
@@ -27,7 +29,7 @@ import firebase from 'firebase'
 
 export default {
   data() {
-    return {}
+    return { currentUser: {} }
   },
 
   methods: {
@@ -42,6 +44,9 @@ export default {
   computed: {
     isSignedIn() {
       return this.$auth.currentUser.uid
+    },
+    isVIP() {
+      return this.$auth.currentUser.isVIP
     },
   },
 }

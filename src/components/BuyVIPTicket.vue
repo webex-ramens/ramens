@@ -46,7 +46,7 @@ export default {
                 })
                 alert('入札が完了しました'), location.reload()
               } else {
-                alert('入札金額>現在価格です')
+                alert('入札金額が足りません')
               }
             } else {
               alert('落札済みです')

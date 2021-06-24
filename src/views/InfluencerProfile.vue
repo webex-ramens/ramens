@@ -1,8 +1,8 @@
 <template>
   <div class="Influencer-item">
     <h2>{{ user.name }}</h2>
-    <img class="photo" v-bind:src="user.PhotoURL" />
-    <div>{{ user.isVIP }}</div>
+    <img class="photo" v-bind:src="user.photoURL" />
+    <!-- <div>{{ user.isVIP }}</div> -->
     <div>{{ user.profile }}</div>
   </div>
 </template>

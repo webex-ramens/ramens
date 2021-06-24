@@ -1,12 +1,10 @@
 <template>
   <div class="Influencer-list">
     <div class="Influencer-item" v-for="user in users" :key="user.id">
-      <router-link
-        :to="{ name: 'Influencer_profile', params: { id: user.id } }"
-      >
+      <router-link :to="{ name: 'InfluencerProfile', params: { id: user.id } }">
         <h2>{{ user.name }}</h2>
-        <img class="Influencer_image" v-bind:src="user.PhotoURL" />
-        <div>{{ user.isVIP }}</div>
+        <img class="Influencer_image" v-bind:src="user.photoURL" />
+        <!-- <div>{{ user.isVIP }}</div> -->
         <div>{{ user.profile }}</div>
       </router-link>
     </div>

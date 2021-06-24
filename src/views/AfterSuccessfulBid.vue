@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div v-if="ticket.finished">この取引は終了しました</div>
+    <div v-if="ticket.vipfinished && ticket.bidderfinished">
+      この取引は終了しました
+    </div>
     <div v-else>
       <h1>落札後の画面です</h1>
       <chat></chat>

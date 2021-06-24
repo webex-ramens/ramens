@@ -66,6 +66,7 @@ export default {
           photoURL: this.photoURL,
           profile: this.profile,
           isVIP: this.isVIP, //締め切り日
+          uid: this.uid,
         }
         firebase
           .firestore()

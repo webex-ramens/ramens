@@ -1,6 +1,15 @@
 <template>
   <div>
-    <div v-if="ticket.bidderDone && ticket.vipDone">
+    <div v-if="ticket.vipfinished && ticket.vipUID == currentUser.uid">
+      ありがとうございました。
+    </div>
+    <div
+      v-else-if="ticket.bidderfinished && ticket.bidderUID == currentUser.uid"
+    >
+      ありがとうございました。
+    </div>
+
+    <div v-else-if="ticket.bidderDone && ticket.vipDone">
       <p>評価してください</p>
       <button @click="good">good</button>
       <button @click="bad">bad</button>
@@ -39,13 +48,13 @@ export default {
         location.reload()
       })
     },
-    async good() {
+    good() {
       const userRef = firebase.firestore().collection('users')
       if (this.$auth.currentUser.uid == this.ticket.vipUID) {
         userRef
           .where('uid', '==', this.ticket.bidderUID)
           .get()
-          .then((snapshot) => {
+          .then(async (snapshot) => {
             let id = snapshot.docs[0].id
             if (!snapshot.docs[0].data().good) {
               userRef.doc(id).update({
@@ -56,13 +65,23 @@ export default {
                 good: snapshot.docs[0].data().good + 1,
               })
             }
+            await firebase
+              .firestore()
+              .collection('tickets')
+              .doc(this.$route.params.id)
+              .update({
+                vipfinished: true,
+              })
+            alert('評価が完了しました')
+            location.reload()
           })
       } else if (this.$auth.currentUser.uid == this.ticket.bidderUID) {
         userRef
           .where('uid', '==', this.ticket.vipUID)
           .get()
-          .then((snapshot) => {
+          .then(async (snapshot) => {
             let id = snapshot.docs[0].id
+
             if (!snapshot.docs[0].data().good) {
               userRef.doc(id).update({
                 good: 1,
@@ -72,25 +91,25 @@ export default {
                 good: snapshot.docs[0].data().good + 1,
               })
             }
+            await firebase
+              .firestore()
+              .collection('tickets')
+              .doc(this.$route.params.id)
+              .update({
+                bidderfinished: true,
+              })
+            alert('評価が完了しました')
+            location.reload()
           })
       }
-      await firebase
-        .firestore()
-        .collection('tickets')
-        .doc(this.$route.params.id)
-        .update({
-          finished: true,
-        })
-      alert('評価が完了しました')
-      location.reload()
     },
-    async bad() {
+    bad() {
       const userRef = firebase.firestore().collection('users')
       if (this.$auth.currentUser.uid == this.ticket.vipUID) {
         userRef
           .where('uid', '==', this.ticket.bidderUID)
           .get()
-          .then((snapshot) => {
+          .then(async (snapshot) => {
             let id = snapshot.docs[0].id
             if (!snapshot.docs[0].data().bad) {
               userRef.doc(id).update({
@@ -101,12 +120,21 @@ export default {
                 bad: snapshot.docs[0].data().bad + 1,
               })
             }
+            await firebase
+              .firestore()
+              .collection('tickets')
+              .doc(this.$route.params.id)
+              .update({
+                vipfinished: true,
+              })
+            alert('評価が完了しました')
+            location.reload()
           })
       } else if (this.$auth.currentUser.uid == this.ticket.bidderUID) {
         userRef
           .where('uid', '==', this.ticket.vipUID)
           .get()
-          .then((snapshot) => {
+          .then(async (snapshot) => {
             let id = snapshot.docs[0].id
             if (!snapshot.docs[0].data().good) {
               userRef.doc(id).update({
@@ -117,17 +145,17 @@ export default {
                 bad: snapshot.docs[0].data().good + 1,
               })
             }
+            await firebase
+              .firestore()
+              .collection('tickets')
+              .doc(this.$route.params.id)
+              .update({
+                bidderfinished: true,
+              })
+            alert('評価が完了しました')
+            location.reload()
           })
       }
-      await firebase
-        .firestore()
-        .collection('tickets')
-        .doc(this.$route.params.id)
-        .update({
-          finished: true,
-        })
-      alert('評価が完了しました')
-      location.reload()
     },
   },
   computed: {

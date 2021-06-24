@@ -42,7 +42,7 @@ export default {
           .collection('chat')
           .add({
             content: this.content,
-            name: this.$auth.currentUser.displayName,
+            name: this.$auth.currentUser.name,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             uid: this.$auth.currentUser.uid,
             photoURL: this.$auth.currentUser.photoURL,
@@ -56,6 +56,7 @@ export default {
       .collection('tickets')
       .doc(this.$route.params.id)
       .collection('chat')
+      .orderBy('timestamp')
     this.unsubscribe = ref.onSnapshot((snapshot) => {
       let logs = []
       snapshot.forEach((doc) => {
