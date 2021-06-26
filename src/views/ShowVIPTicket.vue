@@ -12,7 +12,8 @@
       <router-link
         :to="{ name: 'InfluencerProfile', params: { id: ticket.vipUID } }"
         class="VIPticket__createdBy"
-        >{{ ticket.createdBy }}</router-link
+        ><img class="vip-image" v-bind:src="vip.photoURL" />
+        <p class="vip-name">{{ ticket.createdBy }}</p></router-link
       >
       <div class="VIPticket__deadLine">締切:{{ ticket.deadLine }}</div>
       <BuyVIPTicket />
@@ -43,6 +44,7 @@ export default {
     return {
       ticket: {},
       seen: false,
+      vip: {},
     }
   },
   created() {
@@ -64,6 +66,18 @@ export default {
           // 落札後ボタンを見えるようにするためにseenをtrueに変更
           this.seen = true
         }
+
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(snapshot.data().vipUID)
+          .get()
+          .then((vipsnapshot) => {
+            this.vip = {
+              id: vipsnapshot.id,
+              ...vipsnapshot.data(),
+            }
+          })
       })
   },
 }
@@ -129,8 +143,21 @@ a {
 }
 .VIPticket__createdBy {
   width: 20%;
+  display: flex;
+  align-items: center;
 }
+
 .VIPticket__deadline {
   width: 25%;
+}
+.vip-image {
+  /* width: 180px; */
+  /* height: 180px; */
+  border-radius: 100%;
+  /* background-size: 200px 200px; */
+  background-position: center bottom;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
 }
 </style>
