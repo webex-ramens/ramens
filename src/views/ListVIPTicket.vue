@@ -14,10 +14,12 @@
           <!-- <div class="VIPticket__deadLine">締切:{{ ticket.deadLine }}</div> -->
           <div class="VIPticket-item__bottom">
             <div class="VIPticket__createdBy">
-              <!-- <img class="" v-bind:src="" /> -->
-              {{ ticket.createdBy }}
+              <img class="vip-image" v-bind:src="ticket.photoURL" />
+              <p class="vip-name">{{ ticket.name }}</p>
             </div>
-            <h2 class="VIPticket__price">￥{{ ticket.price }}円</h2>
+            <h2 class="VIPticket__price">
+              ￥{{ ticket.price }}<span>円</span>
+            </h2>
           </div>
         </router-link>
       </div>
@@ -32,6 +34,7 @@ export default {
   data() {
     return {
       tickets: [],
+      vips: [],
     }
   },
   computed: {
@@ -47,11 +50,23 @@ export default {
       .get()
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
-          this.tickets.push({
-            id: doc.id,
-            ...doc.data(),
-          })
+          // this.tickets.push({
+          //   id: doc.id,
+          //   ...doc.data(),
+          firebase
+            .firestore()
+            .collection('users')
+            .doc(doc.data().vipUID)
+            .get()
+            .then((vipsnapshot) => {
+              this.tickets.push({
+                id: doc.id,
+                ...doc.data(),
+                ...vipsnapshot.data(),
+              })
+            })
         })
+        console.log(this.tickets)
       })
   },
 }
@@ -66,16 +81,17 @@ a {
   opacity: 0.8;
 }
 .VIPticket-title {
-  border-bottom: solid;
+  border-bottom: gray solid;
   margin: 2.5%;
   padding-bottom: 2.5%;
+  color: #64b5f6;
 }
 .VIPticket-item {
-  margin: 0 3% 2.5% 3%;
-  width: 20%;
+  margin: 0 1% 2.5% 1%;
+  width: 30%;
   padding: 1%;
-  background-color: #f2f2f2;
-  border-radius: 10px;
+  background-color: white;
+  border-radius: 30px;
 }
 .VIPticket-item-top {
   position: relative;
@@ -95,6 +111,7 @@ a {
 .VIPticket__image {
   width: 100%;
   object-fit: contain;
+  border: gray solid;
 }
 .VIPticket-item__bottom {
   display: flex;
@@ -103,5 +120,24 @@ a {
 }
 .VIPticket__price {
   font-weight: bold;
+  font-size: 200%;
+}
+.VIPticket__price span {
+  font-size: 50%;
+}
+.VIPticket__createdBy {
+  width: 40%;
+  display: flex;
+  align-items: center;
+}
+
+.vip-image {
+  border-radius: 100%;
+  background-position: center bottom;
+  width: 20%;
+}
+.vip-name {
+  /* width: 80%; */
+  /* text-align: left; */
 }
 </style>
