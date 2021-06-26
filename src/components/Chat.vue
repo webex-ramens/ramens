@@ -60,8 +60,8 @@ export default {
     this.unsubscribe = ref.onSnapshot((snapshot) => {
       let logs = []
       snapshot.forEach((doc) => {
-        const { name, content, timestamp } = doc.data()
-        logs.push({ name, content, timestamp: timestamp })
+        const { name, content, timestamp, photoURL } = doc.data()
+        logs.push({ name, content, photoURL, timestamp: timestamp.toMillis() })
       })
       this.logs = logs
     })
@@ -124,7 +124,6 @@ header {
   background-color: white;
   border-radius: 10px;
   width: 850px;
-  height: 600px;
   box-shadow: 0 0 4px gray;
   margin-left: 300px;
 }
