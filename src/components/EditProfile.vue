@@ -1,32 +1,43 @@
 <template>
-  <v-card width="600px" class="mx-auto mt-5">
-    <v-card-title>
-      <h1>プロフィール</h1>
-    </v-card-title>
-    <v-card-text>
-      <v-form>
-        <!--タイトル-->
-        <v-text-field label="名前" v-model="name" />
-        <!--画像-->
-        <input
-          type="file"
-          label="プロフィール画像"
-          v-on:change="onFileChanged"
-        />
-        <!--詳細内容-->
-        <v-textarea label="内容" solo v-model="profile" />
-        <v-switch
-          v-model="isVIP"
-          flat
-          :label="`VIP: ${isVIP.toString()}`"
-        ></v-switch>
+  <v-app>
+    <v-card width="600px" class="mx-auto mt-5">
+      <div class="tag">
+        <h1 class="white--text text-center">プロフィール</h1>
+      </div>
+      <v-card-text>
+        <v-form>
+          <!--画像-->
+          <img class="circle" v-bind:src="photoURL" />
+          <br />
+          <label class="upload-img-btn">
+            画像の変更
+            <input
+              type="file"
+              label="プロフィール画像"
+              v-on:change="onFileChanged"
+              class="file"
+              style="display: none"
+            />
+          </label>
 
-        <v-card-actions>
-          <v-btn class="info" @click="post">編集完了</v-btn>
-        </v-card-actions>
-      </v-form>
-    </v-card-text>
-  </v-card>
+          <!--名前-->
+          <v-text-field label="名前" v-model="name" />
+
+          <!--詳細内容-->
+          <v-textarea label="内容" solo v-model="profile" />
+          <v-switch
+            v-model="isVIP"
+            flat
+            :label="`VIP: ${isVIP.toString()}`"
+          ></v-switch>
+
+          <v-card-actions>
+            <v-btn class="info" @click="post">完了</v-btn>
+          </v-card-actions>
+        </v-form>
+      </v-card-text>
+    </v-card>
+  </v-app>
 </template>
 
 <script>
@@ -37,7 +48,7 @@ export default {
   data() {
     return {
       name: '', //(VIPチケットの題名)
-      photoURL: 'https://via.placeholder.com/800x600',
+      photoURL: '',
       profile: '',
       isVIP: true,
     }
@@ -111,3 +122,40 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.file {
+  text-align: left;
+}
+h1 {
+  text-align: center;
+}
+.circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 100%;
+  background-size: 200px 200px;
+  background-position: center bottom;
+  margin-left: auto;
+  margin-right: auto;
+}
+.upload-img-btn {
+  margin: 22px auto;
+  padding: 8px;
+  border-radius: 4px;
+  max-width: 120px;
+  text-align: center;
+  display: block;
+  background-color: #f1f1f1;
+  color: #73a9ff;
+  box-shadow: 0 2px 6px rgba(146, 146, 146, 0.8);
+  cursor: pointer;
+  font-weight: bold;
+}
+.tag {
+  background-color: #64b5f6;
+}
+.info {
+  font-weight: bold;
+}
+</style>

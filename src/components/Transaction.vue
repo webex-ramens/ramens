@@ -20,7 +20,7 @@
     <div v-else-if="currentUser.uid == ticket.vipUID && ticket.vipDone">
       購入者の取引が完了したら評価をつけることができます
     </div>
-    <button @click="transactionDone" v-else>取引完了ボタン</button>
+    <button @click="transactionDone" v-else>取引完了</button>
   </div>
 </template>
 <script>
