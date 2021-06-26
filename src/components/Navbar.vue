@@ -1,6 +1,9 @@
 <template>
   <v-app-bar>
     <div class="sign-in">
+      <div class="logo">
+        <img src="../images/logo.png" />
+      </div>
       <span>
         <router-link to="/">オークション</router-link>
       </span>
