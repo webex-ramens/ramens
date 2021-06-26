@@ -15,7 +15,7 @@
           <div class="VIPticket-item__bottom">
             <div class="VIPticket__createdBy">
               <img class="vip-image" v-bind:src="ticket.photoURL" />
-              <p class="vip-name">{{ ticket.createdBy }}</p>
+              <p class="vip-name">{{ ticket.name }}</p>
             </div>
             <h2 class="VIPticket__price">
               ￥{{ ticket.price }}<span>円</span>

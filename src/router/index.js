@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import ListVIPTicket from '../views/ListVIPTicket.vue'
 import ShowVIPTicket from '../views/ShowVIPTicket.vue'
 import PostVIPTicket from '../views/PostVIPTicket.vue'
-import Chat from '../components/Chat.vue'
+// import Chat from '../components/Chat.vue'
 import AfterSuccessfulBid from '../views/AfterSuccessfulBid.vue'
 import ListVIPProfile from '../views/ListVIPProfile.vue'
 import EditProfile from '../components/EditProfile.vue'
@@ -28,11 +28,11 @@ const routes = [
     name: 'PostVIPTicket',
     component: PostVIPTicket,
   },
-  {
-    path: '/chat',
-    name: 'Chat',
-    component: Chat,
-  },
+  // {
+  //   path: '/chat',
+  //   name: 'Chat',
+  //   component: Chat,
+  // },
   {
     path: '/after-successful-bid/:id',
     name: 'AfterSuccessfulBid',

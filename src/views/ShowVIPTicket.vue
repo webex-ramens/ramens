@@ -13,9 +13,9 @@
         :to="{ name: 'InfluencerProfile', params: { id: ticket.vipUID } }"
         class="VIPticket__createdBy"
         ><img class="vip-image" v-bind:src="vip.photoURL" />
-        <p class="vip-name">{{ ticket.createdBy }}</p></router-link
+        <p class="vip-name">{{ vip.name }}</p></router-link
       >
-      <div class="VIPticket__deadLine">締切:{{ ticket.deadLine }}</div>
+      <div class="VIPticket__deadLine">{{ deadLine }}</div>
       <BuyVIPTicket />
     </div>
     <router-link
@@ -45,6 +45,7 @@ export default {
       ticket: {},
       seen: false,
       vip: {},
+      deadLine: '',
     }
   },
   created() {
@@ -78,6 +79,16 @@ export default {
               ...vipsnapshot.data(),
             }
           })
+        // 以下締め切りまでの残り時間を計算する処理
+        const date1 = new Date(snapshot.data().deadLine + 'T24:00:00')
+        const date2 = new Date()
+        const diff = date1.getTime() - date2.getTime()
+        const hour = diff / (60 * 60 * 1000)
+        const minute = (hour - Math.floor(hour)) * 60
+        // console.log(Math.floor(hour))
+        // console.log(Math.floor(minute))
+        this.deadLine =
+          '残り' + Math.floor(hour) + '時間' + Math.floor(minute) + '分'
       })
   },
 }
@@ -111,6 +122,7 @@ a {
   background-color: #64b5f6;
   margin: 0 5% 3% 5%;
   color: white;
+  font-size: 300%;
 }
 .VIPticket-item {
   background-color: white;
@@ -130,6 +142,7 @@ a {
   margin-right: 3%;
   text-align: left;
   line-height: 200%;
+  font-size: 150%;
 }
 .VIPticket__image {
   width: 50%;
@@ -147,8 +160,11 @@ a {
   align-items: center;
 }
 
-.VIPticket__deadline {
+.VIPticket__deadLine {
   width: 25%;
+  color: #64b5f6;
+  font-weight: bold;
+  font-size: 200%;
 }
 .vip-image {
   /* width: 180px; */
@@ -159,5 +175,8 @@ a {
   margin-left: auto;
   margin-right: auto;
   width: 30%;
+}
+.vip-name {
+  font-weight: bold;
 }
 </style>
