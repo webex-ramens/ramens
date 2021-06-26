@@ -3,8 +3,13 @@ import VueRouter from 'vue-router'
 import ListVIPTicket from '../views/ListVIPTicket.vue'
 import ShowVIPTicket from '../views/ShowVIPTicket.vue'
 import PostVIPTicket from '../views/PostVIPTicket.vue'
-// import firebase from 'firebase'
+import Chat from '../components/Chat.vue'
+import AfterSuccessfulBid from '../views/AfterSuccessfulBid.vue'
+import ListVIPProfile from '../views/ListVIPProfile.vue'
+import EditProfile from '../components/EditProfile.vue'
+import InfluencerProfile from '../views/InfluencerProfile.vue'
 
+// import firebase from 'firebase'
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,6 +27,31 @@ const routes = [
     path: '/post',
     name: 'PostVIPTicket',
     component: PostVIPTicket,
+  },
+  {
+    path: '/chat',
+    name: 'Chat',
+    component: Chat,
+  },
+  {
+    path: '/after-successful-bid/:id',
+    name: 'AfterSuccessfulBid',
+    component: AfterSuccessfulBid,
+  },
+  {
+    path: '/listVIPProfile',
+    name: 'ListVIPProfile',
+    component: ListVIPProfile,
+  },
+  {
+    path: '/show/user/:id',
+    name: 'InfluencerProfile',
+    component: InfluencerProfile,
+  },
+  {
+    path: '/editProfile',
+    name: 'EditProfile',
+    component: EditProfile,
   },
 ]
 

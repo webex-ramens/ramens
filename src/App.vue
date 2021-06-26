@@ -7,9 +7,13 @@
 
 <script>
 import Navbar from '@/components/Navbar.vue'
+import ChangeSuccessfulBid from '@/ChangeSuccessfulBid'
 export default {
   components: {
     Navbar,
+  },
+  created() {
+    ChangeSuccessfulBid.func()
   },
 }
 </script>
@@ -21,5 +25,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: #f7f7f8;
 }
 </style>
