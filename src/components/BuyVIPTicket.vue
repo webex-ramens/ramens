@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <input type="number" v-model="inputPrice" />
-    <button v-on:click="bidTicket">入札する</button>
+  <div class="bid">
+    <div class="bid-price-box">
+      <div class="bid-price-box__front">￥</div>
+      <input class="bid__price" type="text" v-model="inputPrice" size="" />
+      <div class="bid-price-box__end">円</div>
+    </div>
+    <button class="bid__button" v-on:click="bidTicket">入札</button>
   </div>
 </template>
 
@@ -60,3 +64,40 @@ export default {
   },
 }
 </script>
+<style scoped>
+.bid {
+  display: flex;
+  width: 45%;
+}
+.bid__button {
+  background-color: #64b5f6;
+  color: white;
+  margin: 1%;
+  font-weight: bold;
+  width: 30%;
+  border-radius: 10px;
+  font-size: 200%;
+}
+.bid__button:hover {
+  opacity: 0.8;
+}
+.bid-price-box {
+  display: flex;
+  align-items: center;
+  width: 70%;
+}
+.bid-price-box__front {
+  font-size: 300%;
+}
+.bid-price-box__end {
+  font-size: 120%;
+}
+.bid__price {
+  font-weight: bold;
+  font-size: 300%;
+  height: 100%;
+  width: 100%;
+  border: #f7f7f8 solid;
+  border-radius: 10px;
+}
+</style>
