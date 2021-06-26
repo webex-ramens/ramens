@@ -1,12 +1,20 @@
 <template>
-  <div class="Influencer-list">
-    <div class="Influencer-item" v-for="user in users" :key="user.id">
-      <router-link :to="{ name: 'InfluencerProfile', params: { id: user.id } }">
-        <h2>{{ user.name }}</h2>
-        <img class="Influencer_image" v-bind:src="user.photoURL" />
-        <!-- <div>{{ user.isVIP }}</div> -->
-        <div>{{ user.profile }}</div>
-      </router-link>
+  <div class="Influencer">
+    <h1>インフルエンサー</h1>
+    <div class="Influencer-list">
+      <div class="Influencer-item" v-for="user in users" :key="user.id">
+        <router-link
+          :to="{ name: 'InfluencerProfile', params: { id: user.id } }"
+        >
+          <div class="name">
+            <img class="Influencer_image" v-bind:src="user.photoURL" />
+            <h2>{{ user.name }}</h2>
+          </div>
+          <hr />
+          <!-- <div>{{ user.isVIP }}</div> -->
+          <div class="pro">{{ user.profile }}</div>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -41,9 +49,13 @@ export default {
 
 <style scoped>
 .Influencer-item {
-  border: solid;
-  margin: 0 5% 5% 5%;
+  margin: 0 3% 2.5% 3%;
   width: 20%;
+  padding: 1%;
+  background-color: white;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 0 4px gray;
 }
 .Influencer-list {
   display: flex;
@@ -52,7 +64,33 @@ export default {
   text-align: center;
 }
 .Influencer_image {
-  width: 100%;
-  object-fit: contain;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  background-size: 200px 200px;
+  background-position: center bottom;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  text-decoration: none;
+}
+h1 {
+  font-size: 40px;
+  color: #64b5f6;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+h2 {
+  color: black;
+}
+hr {
+  height: 2px;
+  background-color: #64b5f6;
+  border: none;
+}
+.pro {
+  color: black;
 }
 </style>

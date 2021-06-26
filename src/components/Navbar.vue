@@ -12,14 +12,13 @@
       <span v-else @click="signOut">サインアウト</span>
 
       <span v-if="isSignedIn">
-        <router-link v-if="isVIP && isSignedIn" to="/post">投稿</router-link>
-        <router-link to="/editProfile">プロフィール編集</router-link>
+        <span>
+          <router-link v-if="isVIP && isSignedIn" to="/post">投稿</router-link>
+        </span>
+        <span>
+          <router-link to="/editProfile">プロフィール</router-link>
+        </span>
       </span>
-
-      <!-- ↓いらないと判断しました -->
-      <!-- <span v-else>
-        <router-link to="/Profile">プロフィール</router-link>
-      </span> -->
     </div>
   </v-app-bar>
 </template>
@@ -57,6 +56,8 @@ export default {
   font-weight: bold;
   color: #0a4091;
   padding: 0 1rem;
+  font-size: 20px;
+  color: #64b5f6;
 }
 .sign-in span:hover {
   color: #a332ad2b;
@@ -66,5 +67,10 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
+  margin-top: 20px;
+}
+a {
+  text-decoration: none;
+  color: #64b5f6;
 }
 </style>

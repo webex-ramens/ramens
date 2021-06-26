@@ -1,33 +1,41 @@
 <template>
-  <v-card width="600px" class="mx-auto mt-5">
-    <v-card-title>
-      <h1 class="display-1">投稿</h1>
-    </v-card-title>
-    <v-card-text>
-      <v-form>
-        <!--タイトル-->
-        <v-text-field label="タイトル" v-model="title" />
-        <!--投稿者-->
-        <v-text-field label="username" v-model="createdBy" />
-        <!--画像-->
-        <v-file-input label="picutere" v-model="imageUrl" />
-        <!--詳細内容-->
-        <v-textarea label="詳細" solo v-model="description" />
-        <!--値段-->
-        <v-text-field label="金額" v-model="price" />
-        <v-text-field
-          prepend-icon="mdi-calendar"
-          label="締め切り日"
-          v-model="deadLine"
-          readonly
-        />
-        <v-date-picker v-model="deadLine" />
-        <v-card-actions>
-          <v-btn class="info" @click="post">投稿</v-btn>
-        </v-card-actions>
-      </v-form>
-    </v-card-text>
-  </v-card>
+  <v-app>
+    <v-card width="600px" class="mx-auto mt-5">
+      <div class="tag">
+        <h1 class="white--text text-center">投稿</h1>
+      </div>
+
+      <v-card-text>
+        <v-form>
+          <!--タイトル-->
+          <v-text-field label="タイトル" v-model="title" />
+          <!--投稿者-->
+          <v-text-field label="ユーザー名" v-model="createdBy" />
+          <!--画像-->
+
+          <input type="file" label="画像" v-on:change="onFileChanged" />
+          <!--詳細内容-->
+          <v-textarea label="詳細" solo v-model="description" />
+          <!--値段-->
+          <v-text-field label="金額" v-model="price" />
+          <v-text-field
+            prepend-icon="mdi-calendar"
+            label="締め切り"
+            v-model="deadLine"
+            readonly
+          />
+          <v-date-picker
+            v-model="deadLine"
+            color="green lighten-1"
+            header-color="primary"
+          />
+          <v-card-actions>
+            <v-btn class="info" @click="post">投稿</v-btn>
+          </v-card-actions>
+        </v-form>
+      </v-card-text>
+    </v-card>
+  </v-app>
 </template>
 
 <script>
@@ -47,6 +55,21 @@ export default {
   },
 
   methods: {
+    onFileChanged(e) {
+      console.log(e)
+      const imageUrl = e.target.files[0]
+      if (imageUrl) {
+        const fileRef = firebase.storage().ref().child(this.user.uid)
+        fileRef
+          .put(imageUrl)
+          .then(() => {
+            return fileRef.getDownloadURL()
+          })
+          .then((url) => {
+            this.imageUrl = url
+          })
+      }
+    },
     post() {
       // ログインしているか判定
       firebase.auth().onAuthStateChanged(async (user) => {
@@ -63,7 +86,13 @@ export default {
             imageUrl: this.imageUrl,
             successfulBid: false,
           }
-          await firebase.firestore().collection('tickets').add(ticket)
+          await firebase
+            .firestore()
+            .collection('tickets')
+            .add(ticket)
+            .then(() => {
+              this.$router.push('/')
+            })
           alert('投稿が完了しました')
         } else {
           alert('ログインしてください')
@@ -73,3 +102,12 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.tag {
+  background-color: #64b5f6;
+}
+.info {
+  font-weight: bold;
+}
+</style>
