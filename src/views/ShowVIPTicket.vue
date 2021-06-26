@@ -59,15 +59,6 @@ export default {
           id: snapshot.id,
           ...snapshot.data(),
         }
-        // ”ログインユーザー==落札者”または”ログインユーザー==出品者かどうか”
-        if (
-          firebase.auth().currentUser.uid == snapshot.data().bidderUID ||
-          firebase.auth().currentUser.uid == snapshot.data().vipUID
-        ) {
-          // 落札後ボタンを見えるようにするためにseenをtrueに変更
-          this.seen = true
-        }
-
         firebase
           .firestore()
           .collection('users')
@@ -89,6 +80,15 @@ export default {
         // console.log(Math.floor(minute))
         this.deadLine =
           '残り' + Math.floor(hour) + '時間' + Math.floor(minute) + '分'
+
+        // ”ログインユーザー==落札者”または”ログインユーザー==出品者かどうか”
+        if (
+          this.$auth.currentUser.uid == snapshot.data().bidderUID ||
+          this.$auth.currentUser.uid == snapshot.data().vipUID
+        ) {
+          // 落札後ボタンを見えるようにするためにseenをtrueに変更
+          this.seen = true
+        }
       })
   },
 }
