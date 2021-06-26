@@ -1,9 +1,7 @@
 <template>
   <v-app-bar>
     <div class="sign-in">
-      <div class="logo">
-        <img src="../images/logo.png" />
-      </div>
+      <img src="../images/logo.png" class="logo" />
       <span>
         <router-link to="/">オークション</router-link>
       </span>
@@ -55,6 +53,11 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  text-align: left;
+  width: 170px;
+  height: 40px;
+}
 .sign-in span {
   font-weight: bold;
   color: #0a4091;
