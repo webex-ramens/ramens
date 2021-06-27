@@ -9,8 +9,6 @@
         <v-form>
           <!--タイトル-->
           <v-text-field label="タイトル" v-model="title" />
-          <!--投稿者-->
-          <v-text-field label="ユーザー名" v-model="createdBy" />
           <!--画像-->
 
           <input type="file" label="画像" v-on:change="onFileChanged" />

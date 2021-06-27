@@ -155,6 +155,8 @@ input {
   color: black;
   background: white;
   border-color: black;
+  border: none;
+  outline: none;
 }
 .send {
   color: white;

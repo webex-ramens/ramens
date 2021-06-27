@@ -105,9 +105,11 @@ a {
 }
 .VIPticket__title {
   position: absolute;
-  background-color: black;
+  background-color: #757575;
   color: white;
+  font-weight: bold;
   padding: 0.25%;
+  border-radius: 10px;
 }
 .VIPticket-list {
   display: flex;
@@ -118,7 +120,8 @@ a {
 .VIPticket__image {
   width: 100%;
   object-fit: contain;
-  border: gray solid;
+  border: #bbdefb solid;
+  border-radius: 30px;
 }
 .VIPticket-item__bottom {
   display: flex;
