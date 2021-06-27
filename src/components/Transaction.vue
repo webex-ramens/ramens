@@ -1,23 +1,64 @@
 <template>
-  <div>
-    <div v-if="ticket.vipfinished && ticket.vipUID == currentUser.uid">
+  <div class="app">
+    <div
+      class="thank"
+      v-if="ticket.vipfinished && ticket.vipUID == currentUser.uid"
+    >
       ありがとうございました。
     </div>
     <div
+      class="thank"
       v-else-if="ticket.bidderfinished && ticket.bidderUID == currentUser.uid"
     >
       ありがとうございました。
     </div>
 
     <div v-else-if="ticket.bidderDone && ticket.vipDone">
-      <p>評価してください</p>
-      <button @click="good">good</button>
-      <button @click="bad">bad</button>
+      <div class="thank">
+        <p>評価してください</p>
+      </div>
+
+      <v-app>
+        <div class="value">
+          <div class="good">
+            <v-btn
+              class="blue lighten-2"
+              @click="good"
+              text
+              icon
+              x-large
+              color="white"
+            >
+              <v-icon>mdi-thumb-up</v-icon>
+            </v-btn>
+          </div>
+
+          <div class="bad">
+            <v-btn
+              @click="bad"
+              class="red lighten-2"
+              text
+              icon
+              x-large
+              color="white"
+            >
+              <v-icon>mdi-thumb-down</v-icon>
+            </v-btn>
+          </div>
+        </div>
+      </v-app>
     </div>
-    <div v-else-if="currentUser.uid == ticket.bidderUID && ticket.bidderDone">
+
+    <div
+      class="thank"
+      v-else-if="currentUser.uid == ticket.bidderUID && ticket.bidderDone"
+    >
       インフルエンサーの取引が完了したら評価をつけることができます
     </div>
-    <div v-else-if="currentUser.uid == ticket.vipUID && ticket.vipDone">
+    <div
+      class="thank"
+      v-else-if="currentUser.uid == ticket.vipUID && ticket.vipDone"
+    >
       購入者の取引が完了したら評価をつけることができます
     </div>
     <button @click="transactionDone" v-else>取引完了</button>
@@ -165,3 +206,25 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.app {
+  text-align: center;
+  margin-top: 30px;
+}
+.thank {
+  font-size: 40px;
+  color: #64b5f6;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.value {
+  display: flex;
+  margin-top: 20px;
+}
+.good {
+  margin-left: 650px;
+  margin-right: 40px;
+}
+</style>

@@ -1,27 +1,29 @@
 <template>
   <v-app-bar>
     <div class="sign-in">
-      <div class="logo">
-        <img src="../images/logo.png" />
+      <img src="../images/logo.png" class="logo" />
+      <div class="bar">
+        <span>
+          <router-link to="/">オークション</router-link>
+        </span>
+        <span>
+          <router-link to="/listVIPProfile">インフルエンサー</router-link>
+        </span>
+
+        <span v-if="!isSignedIn" @click="signIn()">サインイン</span>
+        <span v-else @click="signOut">サインアウト</span>
+
+        <span v-if="isSignedIn">
+          <span>
+            <router-link v-if="isVIP && isSignedIn" to="/post"
+              >投稿</router-link
+            >
+          </span>
+          <span>
+            <router-link to="/editProfile">プロフィール</router-link>
+          </span>
+        </span>
       </div>
-      <span>
-        <router-link to="/">オークション</router-link>
-      </span>
-      <span>
-        <router-link to="/listVIPProfile">インフルエンサー</router-link>
-      </span>
-
-      <span v-if="!isSignedIn" @click="signIn()">サインイン</span>
-      <span v-else @click="signOut">サインアウト</span>
-
-      <span v-if="isSignedIn">
-        <span>
-          <router-link v-if="isVIP && isSignedIn" to="/post">投稿</router-link>
-        </span>
-        <span>
-          <router-link to="/editProfile">プロフィール</router-link>
-        </span>
-      </span>
     </div>
   </v-app-bar>
 </template>
@@ -55,6 +57,17 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  width: 170px;
+  height: 60px;
+  margin-top: 3px;
+  margin-right: 450px;
+  margin-left: 20px;
+}
+.bar {
+  text-align: center;
+  margin-top: 15px;
+}
 .sign-in span {
   font-weight: bold;
   color: #0a4091;
@@ -67,10 +80,7 @@ export default {
 }
 
 .sign-in {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-top: 20px;
+  display: flex;
 }
 a {
   text-decoration: none;

@@ -3,8 +3,8 @@
     <div v-if="ticket.vipfinished && ticket.bidderfinished">
       この取引は終了しました
     </div>
-    <div v-else>
-      <h1>落札後の画面です</h1>
+
+    <div v-else class="chat">
       <chat></chat>
       <Transaction v-bind:ticket="ticket"></Transaction>
     </div>
@@ -39,3 +39,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.chat {
+  margin-top: 50px;
+}
+</style>

@@ -1,19 +1,32 @@
 <template>
   <div class="card">
-    <div v-if="logs">
+    <div class="commit" v-if="logs">
       <div v-for="log in logs" :key="log.timestamp">
-        <div v-bind:class="log.uid == user.uid ? myMessage : otherMessage">
+        <div v-if="log.uid == user.uid" class="message my-message">
+          <div class="talk_my">{{ log.content }}</div>
           <img class="photo" v-bind:src="log.photoURL" />
-          <div class="talk01">{{ log.content }}</div>
-          <div>{{ log.name }}</div>
+          <div class="name">{{ log.name }}</div>
+        </div>
+
+        <div v-else class="message other-message">
+          <img class="photo" v-bind:src="log.photoURL" />
+          <div class="talk_other">{{ log.content }}</div>
+          <div class="name">{{ log.name }}</div>
         </div>
       </div>
     </div>
 
-    <div>
-      <input class="input" type="text" v-model="content" />
-      <button v-on:click="post">送信</button>
-    </div>
+    <v-footer class="bar">
+      <input
+        style="width: 400px; height: 50px"
+        class="input"
+        type="text"
+        v-model="content"
+      />
+      <v-btn class="send" @click="post" text x-large right>
+        <v-icon>mdi-send</v-icon>
+      </v-btn>
+    </v-footer>
   </div>
 </template>
 
@@ -86,40 +99,27 @@ export default {
 </script>
 
 <style scoped>
-header {
-  position: fixed;
-  width: 100%;
-  background: #00d1b2;
-  z-index: 2;
-  height: 55px;
-}
-.balloon01 {
-  width: 100%;
-  margin: 1.5em 0;
-  overflow: hidde;
-}
-.talk01 {
+.talk_my {
   display: inline-block;
   position: relative;
   margin: 5px 0 0 105px;
   padding: 17px 13px;
   border-radius: 12px;
   background: #bbdefb;
+  margin-right: 10px;
+  margin-top: -20px;
+  color: black;
 }
-.item {
-  margin: 0 3% 2.5% 3%;
-  width: 20%;
-  padding: 1%;
-  background-color: white;
-  border-radius: 10px;
-  width: 300px;
-  box-shadow: 0 0 4px gray;
+.talk_other {
+  display: inline-block;
+  position: relative;
+  padding: 17px 13px;
+  border-radius: 12px;
+  background: #bbdefb;
+  margin-left: 10px;
+  margin-top: -20px;
 }
-.list {
-  flex-wrap: wrap;
-  justify-content: center;
-  text-align: center;
-}
+
 .photo {
   width: 70px;
   height: 70px;
@@ -133,11 +133,37 @@ header {
   padding: 1%;
   background-color: white;
   border-radius: 10px;
-  width: 850px;
+  width: 600px;
   box-shadow: 0 0 4px gray;
-  margin-left: 300px;
+  margin-left: 420px;
 }
 .my-message {
-  background-color: red;
+  text-align: right;
+}
+.other-message {
+  text-align: left;
+}
+.name {
+  margin-top: -20px;
+}
+.message {
+  margin-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  color: black;
+  background: white;
+  border-color: black;
+  border: none;
+  outline: none;
+}
+.send {
+  color: white;
+  background-color: #bbdefb;
+  margin-left: 46px;
+}
+.bar {
+  display: flex;
 }
 </style>

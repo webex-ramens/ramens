@@ -73,6 +73,12 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  font-size: 60px;
+  color: #64b5f6;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
 a {
   text-decoration: none;
   color: #000000;
@@ -92,15 +98,18 @@ a {
   padding: 1%;
   background-color: white;
   border-radius: 30px;
+  box-shadow: 0 0 4px gray;
 }
 .VIPticket-item-top {
   position: relative;
 }
 .VIPticket__title {
   position: absolute;
-  background-color: black;
+  background-color: #757575;
   color: white;
+  font-weight: bold;
   padding: 0.25%;
+  border-radius: 10px;
 }
 .VIPticket-list {
   display: flex;
@@ -111,7 +120,8 @@ a {
 .VIPticket__image {
   width: 100%;
   object-fit: contain;
-  border: gray solid;
+  border: #bbdefb solid;
+  border-radius: 30px;
 }
 .VIPticket-item__bottom {
   display: flex;
@@ -135,9 +145,6 @@ a {
   border-radius: 100%;
   background-position: center bottom;
   width: 20%;
-}
-.vip-name {
-  /* width: 80%; */
-  /* text-align: left; */
+  margin-right: 20px;
 }
 </style>
