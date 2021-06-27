@@ -77,6 +77,7 @@ hr {
 }
 .profile {
   font-size: 30px;
+  height: 300px;
 }
 .card {
   margin-top: 30px;

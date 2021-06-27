@@ -17,7 +17,7 @@
           <!--詳細内容-->
           <v-textarea label="詳細" solo v-model="description" />
           <!--値段-->
-          <v-text-field label="金額" v-model="price" />
+          <v-text-field prefix="¥" label="金額" v-model="price" />
           <v-text-field
             prepend-icon="mdi-calendar"
             label="締め切り"
@@ -48,7 +48,7 @@ export default {
       description: '', //(詳しい説明)
       createdAt: '', //(投稿日時)
       createdBy: '', //投稿者名
-      imageUrl: 'https://via.placeholder.com/800x600',
+      imageUrl: '',
       price: '',
       deadLine: null, //締め切り日
     }
