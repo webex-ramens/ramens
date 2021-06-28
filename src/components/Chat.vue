@@ -17,12 +17,7 @@
     </div>
 
     <v-footer class="bar">
-      <input
-        style="width: 400px; height: 50px"
-        class="input"
-        type="text"
-        v-model="content"
-      />
+      <input style="height: 50px" class="input" type="text" v-model="content" />
       <v-btn class="send" @click="post" text x-large right>
         <v-icon>mdi-send</v-icon>
       </v-btn>
@@ -133,9 +128,9 @@ export default {
   padding: 1%;
   background-color: white;
   border-radius: 10px;
-  width: 600px;
+  width: 500px;
   box-shadow: 0 0 4px gray;
-  margin-left: 420px;
+  margin: auto;
 }
 .my-message {
   text-align: right;
@@ -157,6 +152,7 @@ input {
   border-color: black;
   border: none;
   outline: none;
+  width: 80%;
 }
 .send {
   color: white;
@@ -165,5 +161,7 @@ input {
 }
 .bar {
   display: flex;
+  flex-wrap: unset;
+  justify-content: space-between;
 }
 </style>

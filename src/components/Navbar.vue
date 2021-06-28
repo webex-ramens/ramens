@@ -1,31 +1,33 @@
 <template>
-  <v-app-bar>
-    <div class="sign-in">
-      <img src="../images/logo.png" class="logo" />
-      <div class="bar">
-        <span>
-          <router-link to="/">オークション</router-link>
-        </span>
-        <span>
-          <router-link to="/listVIPProfile">インフルエンサー</router-link>
-        </span>
-
-        <span v-if="!isSignedIn" @click="signIn()">サインイン</span>
-        <span v-else @click="signOut">サインアウト</span>
-
-        <span v-if="isSignedIn">
-          <span>
-            <router-link v-if="isVIP && isSignedIn" to="/post"
-              >投稿</router-link
-            >
-          </span>
-          <span>
-            <router-link to="/editProfile">プロフィール</router-link>
-          </span>
-        </span>
+  <div class="header">
+    <v-app-bar>
+      <div class="sign-in">
+        <img src="../images/logo.png" class="logo" />
       </div>
+    </v-app-bar>
+    <div class="bar">
+      <span>
+        <router-link to="/">オークション</router-link>
+      </span>
+      <span>
+        <router-link to="/listVIPProfile">インフルエンサー</router-link>
+      </span>
+
+      <span v-if="isSignedIn">
+        <span>
+          <router-link v-if="isVIP && isSignedIn" to="/post"
+            >出品する</router-link
+          >
+        </span>
+        <span>
+          <router-link to="/editProfile">プロフィール</router-link>
+        </span>
+      </span>
+
+      <span v-if="!isSignedIn" @click="signIn()">サインイン</span>
+      <span v-else @click="signOut">サインアウト</span>
     </div>
-  </v-app-bar>
+  </div>
 </template>
 
 <script>
@@ -58,32 +60,36 @@ export default {
 
 <style scoped>
 .logo {
-  width: 170px;
-  height: 60px;
-  margin-top: 3px;
-  margin-right: 450px;
-  margin-left: 20px;
+  height: 64px;
+  width: auto;
 }
 .bar {
-  text-align: center;
-  margin-top: 15px;
-}
-.sign-in span {
+  display: flex;
+  justify-content: center;
   font-weight: bold;
-  color: #0a4091;
-  padding: 0 1rem;
-  font-size: 20px;
-  color: #64b5f6;
+  /* color: #64b5f6; */
+  margin-top: 0.1%;
 }
-.sign-in span:hover {
-  color: #a332ad2b;
+
+.bar span {
+  font-weight: bold;
+  padding: 0 1rem;
+  color: #551a8b;
+}
+.bar span:hover {
+  /* color: #a332ad2b; */
+  opacity: 0.8;
 }
 
 .sign-in {
   display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 64px;
 }
 a {
   text-decoration: none;
-  color: #64b5f6;
+  /* color: #64b5f6; */
 }
 </style>

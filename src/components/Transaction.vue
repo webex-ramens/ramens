@@ -61,7 +61,7 @@
     >
       購入者の取引が完了したら評価をつけることができます
     </div>
-    <button @click="transactionDone" v-else>取引完了</button>
+    <button @click="transactionDone" v-else class="thank">取引完了</button>
   </div>
 </template>
 <script>
@@ -85,7 +85,7 @@ export default {
             vipDone: true,
           })
         }
-        alert('取引完了が完了しました')
+        alert('取引が完了しました')
         location.reload()
       })
     },
@@ -213,7 +213,6 @@ export default {
   margin-top: 30px;
 }
 .thank {
-  font-size: 40px;
   color: #64b5f6;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -221,10 +220,9 @@ export default {
 }
 .value {
   display: flex;
-  margin-top: 20px;
+  margin-top: 10px;
+  justify-content: center;
 }
 .good {
-  margin-left: 650px;
-  margin-right: 40px;
 }
 </style>

@@ -2,23 +2,26 @@
   <v-app class="card">
     <div class="Influencer-item">
       <div class="contents">
-        <img class="photo" v-bind:src="user.photoURL" />
-        <h2 class="name">{{ user.name }}</h2>
-      </div>
-      <div class="value">
-        <div class="good">
-          <v-btn class="blue lighten-2" text icon x-large color="white">
-            <v-icon>mdi-thumb-up</v-icon>
-          </v-btn>
-          {{ user.good }}
+        <div class="contents__profile">
+          <img class="photo" v-bind:src="user.photoURL" />
+          <h2 class="name">{{ user.name }}</h2>
         </div>
-        <div class="bad">
-          <v-btn class="red lighten-2" text icon x-large color="white">
-            <v-icon>mdi-thumb-down</v-icon>
-          </v-btn>
-          {{ user.bad }}
+        <div class="value">
+          <div class="good">
+            <v-btn class="blue lighten-2" text icon x-large color="white">
+              <v-icon>mdi-thumb-up</v-icon>
+            </v-btn>
+            {{ user.good }}
+          </div>
+          <div class="bad">
+            <v-btn class="red lighten-2" text icon x-large color="white">
+              <v-icon>mdi-thumb-down</v-icon>
+            </v-btn>
+            {{ user.bad }}
+          </div>
         </div>
       </div>
+
       <hr />
       <!-- <div>{{ user.isVIP }}</div> -->
       <div class="profile">{{ user.profile }}</div>
@@ -72,15 +75,13 @@ export default {
 }
 .contents {
   display: flex;
-  justify-content: left; /* 水平方向 */
-  align-items: left; /* 垂直方向 */
-  margin-left: 200px;
-  margin-top: 30px;
+  justify-content: space-between; /* 水平方向 */
+  align-items: center; /* 垂直方向 */
   position: relative;
+  margin: 0 10%;
 }
 .name {
-  font-size: 60px;
-  margin-top: 50px;
+  font-size: 300%;
 }
 hr {
   height: 6px;
@@ -101,12 +102,13 @@ hr {
 }
 .value {
   display: flex;
-  margin-top: 20px;
-  margin-top: -100px;
+  width: 20%;
+  justify-content: space-around;
 }
 .good {
-  margin-left: 900px;
-  margin-right: 40px;
-  margin-bottom: 30px;
+}
+.contents__profile {
+  display: flex;
+  align-items: center;
 }
 </style>
